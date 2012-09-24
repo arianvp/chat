@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<script src="//login.persona.org/include.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.1/angular.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js"></script>
+		<script src="javascripts/app.js"></script>
+		<script src="javascripts/slidingview.js"></script>
+
+		<link rel="stylesheet" href="stylesheets/style.css" />
+		<style>
+
+		</style>
+		<script>
+			$(function () {
+				var doSlide = false;
+				$('#body').bind('touchstart',function(e) {
+					var event = e.originalEvent;
+					var x = event.touches[0].pageX;
+					doSlide = x < 20 && x > 0;
+					console.log(event.touches[0]);
+				});
+				var x = 0;
+				$('#body').bind('touchmove',function(e) {
+					var event = e.originalEvent;
+					x = event.touches[0].pageX;
+					if (x < 0) x = 0;
+					if (x > 200) x = 200;
+					$('#body').css('left', x+'px');
+				});
+				$('#body').bind('touchend',function(e) {
+					if ( x < 100) {
+						$('#body').animate({left:0});
+					} else {
+						$('#body').animate({left:200});
+					}
+				});
+			});
+		</script>
+
+
+
+	</head>
+	<body ng-controller="ChatController">
+
+		<div id="sidebar" class="slidingview_sidebar">
+				<a href="" ng-click="login()">Login</a>
+				<a href="" ng-click="logout()">Logout</a>
+				<h2>Contacts</h2>
+				<ul>
+					<li ng-repeat="contact in contacts">
+						    <a href="" ng-click="openChat(contact)">{{contact.name}}</a>
+					</li>
+				</ul>
+		</div>
+
+		<div id="body" class="slidingview_body">
+				arian
+		</div>
+	</body>
+</html>

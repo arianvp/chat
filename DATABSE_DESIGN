@@ -1,0 +1,11 @@
+Chats {
+	messages:[
+		from:User,
+		msg:String
+	]
+	participants:[User]
+}
+Users {
+	_id: Email,
+	name: String
+}
